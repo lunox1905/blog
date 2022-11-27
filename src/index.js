@@ -28,4 +28,4 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'fontend', 'views'))
 
 route(app);
-app.listen(3000)
+app.listen(process.env.PORT)
