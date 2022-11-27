@@ -1,0 +1,106 @@
+.container-writerpost {
+    width: 76%;
+    padding: 20px;
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.form-group textarea {
+    height: 100px;
+}
+
+.form-group h3 {
+    font-size: 15px;
+    font-weight: 550;
+}
+
+.form-control {
+    outline: none;
+    border: none;
+    height: 36px;
+    border-radius: 6px;
+    background-color: #f1f1f1;
+    padding: 0 20px;
+    font-size: 17px;
+}
+
+.file {
+    margin: 10px 0;
+}
+
+.cke_chrome {
+    height: 360px;
+}
+
+.container-manager {
+    width: 76%;
+    padding: 20px;
+    background-color: white;
+    margin: 0 auto;
+    transform: translateX(10%);
+	transition: transform linear 0.2s;
+}
+
+.select-option-manager {
+    margin: 0 15px;
+}
+
+.manager-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.profile-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile-list {
+	list-style: none;
+	padding: 0;
+	line-height: 30px;
+}
+
+.profile-item {
+	text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.profile-icon {
+	font-size: 20px;
+}
+
+.profile-contact {
+	margin-left: 10px;
+}
+
+.profile-input {
+    border: none;
+    border-bottom: 1px solid black;
+    height: 20px;
+    outline: none;
+    font-size: 14px;
+    width: 300px;
+    margin: 0 40px 0 10px;
+}
+
+#img-avatar {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+}
+
+.search-user-auth {
+    outline: none;
+    border-radius: 5px;
+    height: 30px;
+    width: 200px;
+    margin: 0 20px;
+    padding: 10px;
+    font-size: 14px;
+}

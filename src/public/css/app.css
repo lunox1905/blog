@@ -1,0 +1,450 @@
+* {
+	box-sizing: inherit;
+}
+
+html {
+	line-height: 1.6rem;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	border: none;
+}
+
+body {
+	font-size: 13px;
+	width: auto;
+	margin: 0px auto;
+	font-family: Tahoma;
+	background-color: #f1f1f1;
+	width: 100%;
+}
+
+.container {
+    width: 100%;
+	max-width: 100%;
+    margin: 0px auto;
+	display: flex;
+	position: relative;
+	margin-top: 100px;
+	justify-content: center;
+}
+
+.container-post {
+    width: 76%;
+    margin: 0 auto;
+	transform: translateX(10%);
+	transition: transform linear 0.2s;
+}
+
+.posts-item {
+    width: 97.5%;
+    margin: 0px auto;
+    height: 264px;
+    display: flex;
+	background-color: white;
+	padding: 18px 0px;
+}
+
+.box-img {
+	display: flex;
+	align-items: center;
+}
+
+.link-trend img {
+	width: 324px;
+    height: 230px;
+}
+
+.trend-item {
+	width: 100%;
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.blog-title {
+	font-size: 26px;
+	font-weight: 600;
+	margin: 12px;
+}
+
+.box-trend {
+	display: flex;
+	justify-content: center;
+	background-color: white;
+	padding: 15px;
+}
+
+.posts-img {
+    width: 100%;
+    height: 230px;
+}
+
+.body-post {
+	padding: 15px 0;
+	height: 172px;
+}
+
+.post-title {
+	font-size: 20px;
+	font-weight: 700;
+	color: #312e37;
+	margin-top: 10px;
+}
+
+.post-summary {
+	height: 42px;
+	display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
+    justify-content: space-around;
+	font-size: 14px;
+	opacity: 5;
+}
+
+.box-title {
+	height: 50px;
+}
+
+.box-rating {
+	display: flex;
+}
+
+.rating {
+	font-size: 12px;
+	margin: 8px 1px;
+	color: #c8c8c8;
+}
+
+.isRating {
+	color: yellow;
+}
+
+.post-tags {
+	display: flex;
+	padding: 0 0 10px 0;
+	border-bottom: 1px solid #e2e2e2;
+	margin: 0;
+}
+
+.post-tag {
+	border: 1px solid #e2e2e2;
+	display: block;
+	text-decoration: none;
+	padding: 3px 14px;
+	margin: 0 5px;
+	background-color: #f5f5f5;
+	border-radius: 3px;
+	font-size: 12px;
+}
+
+.post-tag:hover {
+	background-color: #312e37;
+	color: #f5f5f5;
+}
+
+.container-author {
+	display: flex;
+	margin: 5px auto;
+	font-size: 13px;
+	justify-content: space-between;
+}
+
+.box-author {
+	display: flex;
+	font-size: 13px;
+}
+
+.box-author p {
+	margin: 0 20px 0 0;
+}
+
+.view {
+	margin: 0 10px;
+}
+
+.view i {
+	margin: 0 5px;
+}
+
+/*Show post*/
+
+.post-container {
+	background-color: white;
+	margin: 0 auto;
+}
+
+.sidebar {
+	background-color: white;
+}
+
+#preview-blog-thumbnail {
+	width: 700px;
+	height: 360px;
+}
+
+.post-header .box-author {
+	padding: 18px;
+	border-bottom: 1px solid #e2e2e2;
+}
+
+.post-img {
+	padding: 20px 0;
+}
+
+.post-img img {
+	width: 754px;
+	height: 410px;
+	display: block;
+	margin: 0 auto;
+}
+
+.blog-content {
+	padding: 10px 30px;
+}
+
+.content-title {
+	font-size: 32px;
+    line-height: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 0;
+	font-family: Arial;
+}
+
+.comment-item {
+	border-bottom: 1px solid #e2e2e2;
+	padding: 20px;
+}
+
+.comment-box {
+	display: flex;
+}
+
+.comment-avatar img{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+.comment-body {
+	padding: 4px 24px;
+}
+
+.comment-user {
+	font-size: 18px;
+	color: blue;
+}
+
+.reply {
+	cursor: pointer;
+	
+}
+
+.reply i{
+	margin: 0 5px;
+}
+
+.post-tags-big {
+	padding: 25px 15px;
+}
+
+.post-tags-big .post-tag {
+	border: 1px solid #e2e2e2;
+	display: block;
+	text-decoration: none;
+	padding: 5px 16px;
+	margin: 0 5px;
+	background-color: #f5f5f5;
+	border-radius: 3px;
+	font-size: 13px;
+}
+
+.box-rating-big {
+	margin: 5px 20px;
+}
+
+.box-rating-big .rating {
+	font-size: 17px;
+	margin: 8px 1px;
+}
+
+.container-comment{
+	width: 100%;
+	display: flex;
+	margin: 0 20px;
+}
+
+.post-container h4 {
+	margin: 10px 0 20px 20px;
+}
+
+.comment-box-writer {
+	border: 1px solid #e2e2e2;
+	width: calc(100% - 100px);
+	position: relative;
+	margin-bottom: 70px;
+	margin-left: 15px;
+}
+
+.writer-comment {
+	min-height: 40px;
+	width: 100%;
+	font-size: 14px;
+	border-radius: 3px;
+    box-sizing: border-box;
+    background: #fafafa;
+	outline: none;
+}
+
+.btn-submit {
+	width: 70px;
+	height: 30px;
+	background-color: blue;
+	border: none;
+	color: white;
+	font-size: 14px;
+	border-radius: 3px;
+}
+
+.comment-btn {
+	position: absolute;
+	right: 0;
+	bottom: -60px;
+}
+
+
+@keyframes  keyframes2{
+	from {
+		left: 0;
+	}
+	to {
+		left: -300px;
+		display: none;
+	}
+}
+
+
+
+
+
+.box-postsbyauthor {
+	display: flex;
+	align-items: center;
+	padding: 20px;
+}
+
+.box-postsbyauthor a {
+	display: flex;
+	text-decoration: none;
+	color: black;
+	align-items: center;
+}
+
+.box-postsbyauthor img {
+	width: 64px;
+	height: 50px;
+	margin-right: 10px;
+}
+
+.sidebar {
+	width: 100%;
+	background-color: white;
+}
+
+.sidebar-container h2 {
+	padding: 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.box-postsbyauthor h5 {
+	font-size: 15px;
+	margin: 0;
+}
+
+.container-comment.hide {
+	display: none;
+}
+
+.box-action {
+	display: flex;
+	justify-content: right;
+	background-color: white;
+	align-items: center;
+}
+
+.box-action a {
+	margin: 0 20px;
+}
+
+.box-action a button{
+	background-color: blue;
+	border-radius: 5px;
+	border: none;
+	height: 36px;
+	width: 100px;
+	font-size: 14px;
+	color: white;
+}
+
+#image-box img {
+	width: 817px;
+	height: 460px;
+}
+
+.row-auth {
+	line-height: 40px;
+	font-size: 17px;
+}
+
+.footer {
+	background-color: black;
+	width: 100%;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	position: fixed;
+	z-index: 1000;
+}
+
+.container-comment img {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+}
+
+.nav-pagination {
+	margin: 20px auto;
+	display: flex;
+	justify-content: center;
+}
+
+.pagination-list {
+	display: flex;
+	list-style: none;
+}
+
+.cke_contents .cke_reset {
+	height: 300px !important;
+}
+
+#cke_1_contents {
+	height: 300px !important;
+}
+
+.cke_editable  {
+	margin-top: 545px;
+}
+
+.current {
+	background-color: rgb(75, 75, 242);
+	color: white;
+}

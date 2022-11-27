@@ -1,0 +1,162 @@
+<div class="container">
+    {{> menu}}
+    <div class="container-post">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="post-container">
+                    <div class="post-header">
+                        <div class="box-author">
+                            <p>
+                                Tác giả: 
+                                <a href="/manager/profile/{{posts.author._id}}">{{posts.author.name}}</a>
+                            </p>
+                            <p class="create-post">{{{time posts.createdAt}}}</p>
+                        </div>
+                        <div class="post-img">
+                            <img src="{{posts.image}}" alt="">
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="content-title">{{posts.title}}</div>
+                        <div class="post-content">{{{posts.content}}}</div>
+                    </div>
+                    <ul class="post-tags post-tags-big">
+                        {{{tags posts.tags}}}
+                    </ul>
+                    <div class="box-rating box-rating-big">
+                        {{{rating posts.rating}}}
+                    </div>
+
+                    <h4>Bình luận</h4>
+
+                    <div class="container-comment"> 
+                        <img src="{{image}}" alt=""> 
+                        <div class="comment-box-writer">
+                            <div class="writer-comment" placeholder="Viết bình luận" contenteditable=""></div>
+                            <button class="btn-submit comment-btn">Gửi</button>
+                        </div>
+                        
+                    </div>
+                      
+
+                    <div class="comment-list">
+                        {{{comments posts.comment image}}}
+                    </div>
+        
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="sidebar">
+                    <div class="sidebar-container">
+                        <h2>Bài viết cùng tác giả</h2>
+                        {{#each postsByAuthor}}
+                            <div class="box-postsbyauthor">
+                                <a href={{this.slug}}>
+                                    <img src="{{this.image}}" alt="">
+                                    <h5>{{this.title}}</h5>
+                                </a>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form class="cmt-form" method="POST">
+    <input type="text" name="content">
+</form>
+<script>
+    var w = document.querySelectorAll('.writer-comment')
+    var l = document.querySelector('.comment-list')
+    var rating = document.querySelectorAll('.rating')
+    var btnSubmit = document.querySelectorAll('.comment-btn')
+
+    for(let i = 0; i < 5; i++) {
+        rating[i].onclick = () => {
+            for(let j = i; j >= 0; j--) {
+                rating[j].style.color = 'yellow'
+            }
+            for(let j = i+1; j < 5; j++) {
+                rating[j].style.color = '#c8c8c8'
+            }
+            updateRating(i+1)
+            console.log(`{{posts.rating.score}}`)
+        } 
+    }
+
+    function updateRating(rating) {
+        $.ajax({
+                type: 'POST',
+                url: '/sharing/updaterating/{{posts.slug}}',
+                data: ({rating: rating, amount: `{{posts.rating.amount}}`,
+                    score: `{{posts.rating.score}}`}), 
+                success: function(data){
+                    
+                },
+                error: function(err) {
+                    console.log(err)
+                }
+            })
+    }
+
+    for(let i = 0; i < btnSubmit.length; i++) {
+        btnSubmit[i].onclick = () => {
+                
+            if(`{{username}}`) {
+                comments[i].style.display = 'none'
+                $.ajax({
+                    type: 'POST',
+                    url: '/sharing/insertcomment/{{posts.slug}}',
+                    data: ({content: w[i].innerHTML}), 
+                    success: function(data){
+                        if(data.mess == 'err'){
+                            document.querySelector('.err-mess').innerHTML = "Dã xảy ra lỗi"
+                        } else {
+                            l.innerHTML += `
+                                <div class="comment-item">
+                        <div class="comment-box">
+                            <div class="comment-avatar">
+                                <img src="${data.avatar}" alt="">
+                            </div>
+                            <div class="comment-body">
+                                <h5 class="comment-user">${data.name}</h5>
+                                <p class="comment-content">${data.content}</p>
+                                <div class="reply"><i class="fas fa-reply"></i>Trả lời</div>
+                            </div>
+                        </div>
+                        <div class="container-comment hide"> 
+                            <img src="" alt=""> 
+                            <div class="comment-box-writer">
+                                <div class="writer-comment" placeholder="Viết bình luận" contenteditable=""></div>
+                                <button class="btn-submit comment-btn">Gửi</button>
+                            </div>
+                        </div>
+                    </div> 
+                            `
+                            console.log('d')
+                        }
+                    
+                }
+                ,
+                    error: function(err) {
+                        console.log(err)
+                    }
+                })
+            } else {
+                window.location="/login"
+            }
+        }
+    }
+
+    
+    var repItem = document.querySelectorAll('.reply')
+    console.log(repItem)
+    var comments = document.querySelectorAll('.container-comment')
+    for(let i = 0; i < repItem.length; i++) {
+        repItem[i].onclick = () => {
+            comments[i+1].style.display = 'flex'
+        }
+    }
+</script>

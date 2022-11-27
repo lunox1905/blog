@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="/css/menu.css">
+<div class="container-menu ">
+  <div class="menu">
+    <div class="box-menu">
+      <a class="create-menu" style="text-decoration: none" href="/sharing/create">
+        <div class="create-box">
+          <i class="fas fa-plus"></i>Tạo bài viết
+        </div>
+      </a>
+    </div>
+    <div class="box-menu">
+      <a href="/sharing">
+        <div class="menu-item active">
+          <i class="fas fa-home"></i><span>Trang chủ</span>
+        </div>
+      </a>
+
+
+      <a href="/sharing/manager">
+      <div class="menu-item">
+        <i class="fas fa-th"></i><span>Quản lý bài viết</span>
+      </div>
+      </a>
+      <a href="/manager/profile">
+      <div class="menu-item">
+        <i class="fas fa-user-alt"></i><span>Thông tin cá nhân</span>
+      </div>
+      </a>
+      
+      {{#ifRole role "admin"}}
+      <a href="/sharing/browse">
+        <div class="menu-item">
+          <i class="fas fa-book-medical"></i><span>Duyệt bài viết</span>
+        </div>
+        </a>
+        <a href="/manager">
+        <div class="menu-item">
+          <i class="fas fa-tasks"></i><span>Quản lý thành viên</span>
+        </div>
+        </a>
+        <a href="/manager/authorization">
+        <div class="menu-item">
+          <i class="fas fa-share"></i><span>Phân quyền thành viên</span>
+        </div>
+        </a>
+      {{/ifRole}}
+      {{#ifRole role "browse"}}
+      <a href="/sharing/browse">
+        <div class="menu-item">
+          <i class="fas fa-book-medical"></i><span>Duyệt bài viết</span>
+        </div>
+        </a>
+      {{/ifRole}}
+      <a href="#">
+        <div class="menu-item">
+          <i class="fas fa-hands-helping"></i><span>Trợ giúp</span>
+        </div>
+      </a>
+      <a href="#">
+        <div class="menu-item">
+          <i class="fas fa-cog"></i><span>Cài đặt</span>
+        </div>
+      </a>
+    </div>
+    <div class="box-menu">
+      <div class="menu-footer">
+        <a href="">Điều khoản dịch vụ</a>
+        <a href="">Bảo mật</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var m = document.querySelector('.menu-icon')
+  m.onclick = () => {
+    console.log('d')
+    var c = document.querySelector('.menu')
+      if(!c.closest('.hide')) {
+        document.querySelector('.container-menu').classList.add('hide')
+        document.querySelector('.container-menu').style.transform = 'translateX(-100%)'
+        document.querySelector('.container-post').style.transform = 'translateX(0px)'
+        document.querySelector('.container-manager').style.transform = 'translateX(0px)'
+        
+      } else {
+        
+        document.querySelector('.container-menu').classList.remove('hide')
+        document.querySelector('.container-menu').style.transform = 'translateX(0%)'
+        document.querySelector('.container-post').style.transform = 'translateX(10%)'
+        document.querySelector('.container-manager').style.transform = 'translateX(10%)'
+      }
+  }
+</script>

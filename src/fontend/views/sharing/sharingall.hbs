@@ -1,0 +1,135 @@
+<div class="container">
+  {{> menu}}
+  <div class="container-post">
+    <div class="row">
+      <h1 class="blog-title">Xu hướng</h1>
+      <div class="trend-item">
+      {{#each trend}}
+      
+      <div class="col-sm-4 ">
+        <div class="box-trend">
+        <div>
+          <a href="/sharing/post/{{this.slug}}" class="link-trend">
+            <img src="{{this.image}}" alt="">
+            <div class="box-title">
+              <h3 class="post-title">{{this.title}}</h3>
+            </div>
+          </a>
+            <div class="box-rating">
+              {{{rating this.rating}}}
+            </div>
+            <p class="post-summary">{{this.summary}}</p>
+            <ul class="post-tags">
+              {{{tags this.tags}}}
+            </ul>
+            <div class="footer-post">
+              <div class="container-author">
+                <p>
+                  Tác giả: <a href="">{{this.author.name}}</a>
+                </p>
+                <div class="view">
+                <i class="fas fa-eye"></i>
+                <span>{{this.view}}</span>
+              </div>
+              </div>
+            </div>
+        </div>
+        
+        </div>
+      </div>
+      
+      {{/each}}
+      </div>
+      <h1 class="blog-title">Bài viết mới nhất</h1>
+      {{#each posts}}
+      <div class="posts-item">
+        <div class="col-sm-4">
+          <a href="/sharing/post/{{this.slug}}" class="box-img">
+            <img class="posts-img" src="{{this.image}}">
+            
+            
+          </a>
+        </div>
+        <div class="col-sm-8">
+          <div class="body-post">
+            <a href="/sharing/post/{{this.slug}}" class="post-link">
+              <h3 class="post-title">{{this.title}}</h3>
+            </a>
+            <div class="box-rating">
+              {{{rating this.rating}}}
+            </div>
+            <p class="post-summary">{{this.summary}}</p>
+            
+          </div>
+          <div class="footer-post">
+            <ul class="post-tags">
+              {{{tags this.tags}}}
+            </ul>
+            <div class="container-author">
+              <div class="box-author">
+                <p>
+                  Tác giả: 
+                  <a href="">{{this.author.name}}</a>
+                </p>
+                <p class="create-post">{{{time this.createdAt}}}</p>
+              </div>
+              <div class="view">
+                <i class="fas fa-eye"></i>
+                <span>{{this.view}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+
+      {{#pagination current total size}}
+      <nav aria-label="Page pavination" class="nav-pagination">
+        <ul class="pagination-list">
+          {{#unless startFromFirstPage}}
+          <li class="page-item">
+            <a class="page-link" href="?page=1" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          {{/unless}}
+          {{#each pages}}
+          {{#if isCurrent}}
+            <li class="page-item"><a class="page-link current" href="?page={{page}}">{{page}}</a></li>
+          {{/if}}
+          {{#unless isCurrent}}
+            <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {{/unless}}
+          {{/each}}
+          {{#unless endAtLastPage}}
+            <li class="page-item">
+              <a class="page-link" href="?page={{max}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          {{/unless}}
+
+        </ul>
+      </nav>
+      {{/pagination}}
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  var d = document.querySelector('.logo')
+  d.onclick = () => {
+    console.log('d')
+  }
+
+  var c = document.querySelector('.menu')
+  if(!c.closest('.hide')) {
+     } else {
+    
+  }  
+
+</script>

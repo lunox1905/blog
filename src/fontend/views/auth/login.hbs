@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="/css/auth.css">
+<div class="container-auth">
+    <form id="loginform" method="POST" action="/login" accept-charset="utf-8">
+
+        <h1>Đăng nhập</h1>
+        <div class="err-server">
+            <span class="err-mess"></span>
+        </div>
+        <div class="form-group">
+            <label for='email' class="form-label">Email</label>
+
+            <input class="btn-input" name='email' id='email' type="text" placeholder="VD: email@domain.com">
+
+            <span class="form-message"></span>
+
+        </div>
+
+        
+        <div class="form-group">
+            <label for='password' class="form-label">Password</label>
+
+            <input class="btn-input" name='password' id='password' type="password">
+
+            <span class="form-message"></span>
+        </div>
+        
+        <div class="action">
+            <div>
+                <input type="checkbox">
+                <span>Nhớ mật khẩu</span>
+            </div>
+            <a href="">Quên mật khẩu</a>
+        </div>
+        
+        <button type="submit" class="btn" id="btn">Đăng nhập</button>
+        <div class="box-action">
+            Chưa có tài khoản? 
+            <a href="/register">Đăng kí</a>
+        
+        </div>
+                    
+                 
+    </div>          
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    Validator({
+        form: '#loginform',
+        formGroup: '.form-group',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired("#email", 'Vui lòng nhập email'),
+            Validator.isEmail('#email', 'Email không hợp lệ'),
+            Validator.minLength("#password", 6, 'Password phải lớn hơn 5 ký tự'),
+            
+        ],
+        onSubmit: function (data) {
+            
+                    $.ajax({
+                        type: 'POST',
+                        url: '/login',
+                        data: ({email: data.email, 
+                        password: data.password}), 
+                        success: function(data){
+                            if(data.mess == 'err'){
+                                document.querySelector('.err-mess').innerHTML = "Mật khẩu or email không chính xác"
+                            } else {
+                                location.replace('/sharing')
+                            }
+                        },
+                        error: function(err) {
+                            console.log(err)
+                        }
+                    
+                })
+             
+        }
+    })
+    })
+</script>

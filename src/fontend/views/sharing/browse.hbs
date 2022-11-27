@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="/css/manager.css">
+<div class="container">
+  {{>menu}}
+  <div class="container-manager container-post">
+    <h3>Duyệt bài viết</h3>
+    <form name="container-form" method="POST" action="manager/handle-manager" class="mt-4">
+      
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">STT</th>
+            <th scope="col">Tên bài</th>
+            <th scope="col">Thời gian</th>
+            <th scope="col">Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each posts}}
+          <tr class="row-auth">
+            <td>
+              <div class="form-check">
+                <input type="checkbox" name="flimIds[]" value="{{this._id}}" class="form-check-input">
+              </div>
+            </td>
+            <th scope="row">{{sum @index 1}}</th>
+            <td>{{this.title}}</td>
+
+            <td>
+              {{this.createdAt}}
+      
+            </td>
+            <td>
+              <a href="/sharing/shownewpost/{{this._id}}" class="btn btn-link">Xem</a>
+              
+            </td>
+          </tr>
+          {{/each}}
+
+
+        </tbody>
+      </table>
+    </form>
+  
+  </div>
+</div>
+<script>
+
+</script>

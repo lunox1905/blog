@@ -1,0 +1,88 @@
+<div class="container">
+  {{> menu}}
+  <div class="container-post">
+    <div class="row">
+      <h1 class="blog-title">Danh sách tìm kiếm</h1>
+      {{#each posts}}
+      <div class="posts-item">
+        <div class="col-sm-4">
+          <a href="/sharing/post/{{this.slug}}" class="box-img">
+            <img class="posts-img" src="{{this.image}}">
+            
+            
+          </a>
+        </div>
+        <div class="col-sm-8">
+          <div class="body-post">
+            <a href="/sharing/post/{{this.slug}}" class="post-link">
+              <h3 class="post-title">{{this.title}}</h3>
+            </a>
+            <div class="box-rating">
+              {{{rating this.rating}}}
+            </div>
+            <p class="post-summary">{{this.summary}}</p>
+            
+          </div>
+          <div class="footer-post">
+            <ul class="post-tags">
+              {{{tags this.tags}}}
+            </ul>
+            <div class="box-author">
+              <p>
+                Tác giả: 
+                <a href="">{{this.author.name}}</a>
+              </p>
+              <p class="create-post">{{{time this.createdAt}}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+{{#pagination current total size}}
+  <nav aria-label="Page navination" class="nav-pagination">
+    <ul class="pagination justify-content-center">
+      {{#unless startFromFirstPage}}
+      <li class="page-item">
+        <a class="page-link" href="manager?page=1" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      {{/unless}}
+      {{#each pages}}
+      {{#if isCurrent}}
+      <li class="page-item"><a class="page-link current" href="manager?page={{page}}">{{page}}</a></li>
+      {{/if}}
+      {{#unless isCurrent}}
+      <li class="page-item"><a class="page-link" href="manager?page={{page}}">{{page}}</a></li>
+      {{/unless}}
+      {{/each}}
+      {{#unless endAtLastPage}}
+      <li class="page-item">
+        <a class="page-link" href="manager?page={{total}}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+      {{/unless}}
+
+    </ul>
+  </nav>
+{{/pagination}}
+<script>
+  var d = document.querySelector('.logo')
+  d.onclick = () => {
+    console.log('d')
+  }
+
+  var c = document.querySelector('.menu')
+  if(!c.closest('.hide')) {
+     } else {
+    
+  }  
+
+</script>

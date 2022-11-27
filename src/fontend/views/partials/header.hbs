@@ -1,0 +1,60 @@
+
+<div class="header">
+	
+  <div class="header-container">
+    <div class="header-box">
+      <div class="menu-icon">
+        <i class="fas fa-bars"></i>
+      </div>
+      
+      <div class="logo">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwkEwIxJVtdPy662BGNn-Dq03SqxWUnYdvTw&usqp=CAU" alt="">
+      </div>
+    </div>
+    <div class="header-search">
+      <i class="fas fa-search"></i>
+      <form class="form-inline my-2 my-lg-0" action="/sharing/search">
+        <input id="search-post" class="input-search" type="search" name="name" placeholder="Bài viết cần tìm" aria-label="Search">
+      </form>
+    </div>
+  
+    {{#if image}}
+    <div class="user-option">
+        <img src="{{image}}" alt="" class="user-avatar">
+        <div class="">
+         
+        </div>
+        {{#if username}}
+        <div class="option-box">
+          <ul class="list-option">
+            <a href="/manager/profile" class="item-option">Thông tin cá nhân</a>
+            <a href="/sharing/manager" class="item-option">Quản lý bài viết</a>
+            <a href="/changePass" class="item-option">Thay đổi mật khẩu</a>
+            <a href="/logout" class="item-option">Đăng xuất</a>
+          </ul>
+        </div>
+
+        {{else}}
+        <div class="option-box">
+          <ul class="list-option">
+            <a href="/login" class="item-option">Đăng nhập</a>
+          </ul>
+        </div>
+        {{/if}}
+    </div>
+    {{else}}
+      <div></div>
+    {{/if}}
+  </div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+  $('#search-post').keypress(function(event) {
+  if (event.keyCode == 13 || event.which == 13) {
+          event.submit();       
+      }
+  });
+  
+</script>

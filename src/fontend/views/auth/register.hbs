@@ -1,0 +1,92 @@
+<link rel="stylesheet" href="/css/auth.css">
+<div class="container-auth">
+
+    <form id="registerform" method="POST" action="/register" accept-charset="utf-8">
+
+        <h1>Đăng kí tài khoản</h1>
+        
+        <div class="form-group">
+            <label for='email' class="form-label">Email</label>
+
+            <input class="btn-input" name='email' id='email' type="text" placeholder="VD: email@domain.com">
+
+            <span class="form-message"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label for='username' class="form-label">Username</label>
+
+            <input class="btn-input" name='username' id='username' type="text" placeholder="VD: Thái Lâm Phong">
+
+            <span class="form-message"></span>
+        </div>
+        <div class="form-group">
+            <label for='password' class="form-label">Password</label>
+
+            <input class="btn-input" name='password' id='password' type="password">
+
+            <span class="form-message"></span>
+        </div>
+        <div class="form-group">
+            <label for='repassword' class="form-label">Repassword</label>
+
+            <input class="btn-input" name="repassword" id='repassword' type="password">
+            <span class="form-message"></span>
+        </div>
+        <div class="err-server">
+            <span class="err-mess"></span>
+        </div>
+
+        <div class="form-group">
+        <div class="form-btn">
+            <a href="/login">Đăng nhâp</a>
+            <button type="submit" class="btn">Đăng ký</button>
+        
+        </div>
+        </div>
+    </form>
+	
+         
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Validator({
+            form: '#registerform',
+            formGroup: '.form-group',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired("#username", 'Vui lòng nhập username'),
+                Validator.isRequired("#email", 'Vui lòng nhập email'),
+                Validator.isEmail('#email', 'Email không hợp lệ'),
+                Validator.minLength("#password", 6, 'Password phải lớn hơn 5 ký tự'),
+                Validator.isConfirmed('#repassword', function(){
+                    return document.querySelector('#loginform #password').value;
+                }, 'Mật khẩu nhập lại không chính xác'),
+                Validator.isRequired('#repassword', 'Không được để trống phần này')
+            ],
+            onSubmit: function (data) {
+                $.ajax({
+                        type: 'POST',
+                        url: '/register',
+                        data: ({ 
+                            email: data.email, 
+                            password: data.password,
+                            username: data.username }), 
+                        success: function(data){
+                            if(data.mess == 'err'){
+                                document.querySelector('.err-mess').innerHTML = "Đã tồn tại email này"
+                            } else {
+                                location.replace('/login')
+                            }
+                        },
+                        error: function(err) {
+                            console.log(err)
+                        }
+                    
+                })
+            }
+        })
+    })
+</script>

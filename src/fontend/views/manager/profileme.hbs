@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="/css/manager.css">
+<div class="container">
+  {{>menu}}
+  <div class="container-manager container-post">
+  <form name="container-form" method="POST" action="/manager/profile" class="mt-4" enctype="multipart/form-data">
+    <div class="profile-content">
+		<div class="profile-group">
+			<div class="profile-avatar">
+				<img id="img-avatar" src="{{image}}" alt="">
+			</div>
+			<input class="file thumbnail-file" id="blog-thumbnail" onchange="uploadPhotos()" name="avatar" type="file" accept="image/png,image/x-png,image/gif,image/jpeg,image/jpg" >
+			<h5 class="profile-name">Username: 
+				<input type="text" value="{{user.name}}" name="name" class="profile-input">
+					<i class="fas fa-pen icon-edit"></i>
+			</h5>
+		</div>
+		<div class="profile-group">
+			<h3 class="cv-title">Thông tin</h3>
+			<ul class="profile-list">
+				<li class="profile-item">
+					<i class="far fa-calendar profile-icon"></i>
+					<input type="text" value="{{user.brithday}}" name="birthday" class="profile-input">
+					<i class="fas fa-pen icon-edit"></i>
+				</li>
+				<li class="profile-item">
+					
+					<i class="fab fa-facebook profile-icon"></i>				
+					<input type="text" value="{{user.facebook}}" name="facebook" class="profile-input">
+					<i class="fas fa-pen icon-edit"></i>
+				</li>
+				<li class="profile-item">
+					<i class="far fa-envelope profile-icon"></i>
+					<input type="text" value="{{user.gmail}}" name="gmail" class="profile-input">
+					<i class="fas fa-pen icon-edit"></i>
+				</li>
+				<li class="profile-item">
+					<i class="fas fa-home profile-icon"></i>
+					<input type="text" value="{{user.address}}" name="address" class="profile-input">
+					<i class="fas fa-pen icon-edit"></i>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-primary">Lưu thông tin</button>
+  </form>
+  </div>
+</div>
+<script>
+	var t = document.getElementById('blog-thumbnail')
+    t.onchange = () => {
+        var fileSelected = t.files
+        var fileToLoad = fileSelected[0]
+        console.log(fileToLoad)
+        var fileReader = new FileReader()
+        fileReader.onload = (fileLoad) => {
+            var srcData = fileLoad.target.result
+		console.log(srcData)
+            document.getElementById('img-avatar').src = srcData
+      
+        }
+        fileReader.readAsDataURL(fileToLoad)
+    }
+    var d = document.querySelectorAll('.icon-edit')
+	var c = document.querySelectorAll('.profile-input')
+	for(let i = 0; i < 4; i++) {
+		d[i].onclick = () => {
+			console.log(focus())
+			c[i].focus()
+		}
+	}
+
+</script>

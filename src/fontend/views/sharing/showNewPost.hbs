@@ -1,0 +1,87 @@
+<div class="container">
+    {{> menu}}
+    <div class="container-post">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="post-container">
+                    <div class="post-header">
+                        <div class="box-author">
+                            <p>
+                                Tác giả: 
+                                <a href="">{{post.author.name}}</a>
+                            </p>
+                            <p class="create-post">{{{time post.createdAt}}}</p>
+                        </div>
+                        <div class="post-img">
+                            <img src="{{post.image}}" alt="">
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="content-title">{{post.title}}</div>
+                        <div class="post-content">{{{post.content}}}</div>
+                    </div>
+                    <ul class="post-tags post-tags-big">
+                        {{{tags post.tags}}}
+                    </ul>
+                    
+                </div>
+                <div class="box-action">
+                    <a href="/sharing/browsepost/{{post._id}}">
+                        <button>Duyệt bài</button>
+                    </a>
+                    <a href="/sharing/editpost/{{post._id}}">
+                        <button>Sửa bài</button>
+                    </a>
+                    <a href="" data-toggle="modal" data-id="{{post._id}}" data-name="{{post.slug}}"
+              data-target="#delete-modal" class="btn btn-link"><button>Xóa bài</button></a>
+                        
+                   
+                </div>
+             </div>              
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Xóa phim</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Xóa bài viết này?
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btn-delete" class="btn btn-danger">Xóa</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<form name="delete-form" method="POST"></form>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var id;
+    var name;
+    var deleteForm = document.forms['delete-form']
+    var containerForm = document.forms['container-form']
+
+    $('#delete-modal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      id = button.data('id') // Extract info from data-* attributes
+      name = button.data('name')
+    })
+
+    var btnDelete = document.getElementById('btn-delete')
+    btnDelete.onclick = function () {
+      deleteForm.action = '/sharing/deletepost/'  + id + '?_method=DELETE'
+      deleteForm.submit()
+    }
+
+    
+  })
+</script>

@@ -1,0 +1,85 @@
+
+<link rel="stylesheet" href="/css/manager.css">
+<div class="container">
+{{> menu}}
+<div class="container-post container-manager">
+    <form action="/sharing/create" name="container-form" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <h3>Tiêu đề</h3>
+            <input type="text" class="form-control" id="" name="title" placeholder="">
+        </div>
+        <div class="form-group">
+            <h3>Đường dẫn</h3>
+            <input type="text" class="form-control" id="" name="slug" placeholder="">
+            <p>Đường dẫn không có dấu cách nhau bằng dấu ' - '</p>
+            <span style="color: red;" class="mess-err"></span>
+        </div>
+        <div class="form-group">
+            <h3>Tóm tắt</h3>
+            <textarea class="form-control" id="" name="summary" placeholder="">
+           </textarea>
+        </div>
+        <div class="form-group">
+            <h3>Tag</h3>
+            <input type="text" class="form-control" id="" name="tag" placeholder="">
+            <span>Mỗi tag cách nhau bằng dấu ' , '</span>
+        </div>
+        
+        <div class="form-group">
+            <h3 class="required">Ảnh chia sẻ</h3>
+            <input class="file thumbnail-file" onchange="uploadPhotos()" name="image" type="file" accept="image/png,image/x-png,image/gif,image/jpeg,image/jpg" id="blog-thumbnail">
+    
+            <p>Để hiển thị tốt nhất, kích thước ảnh của bạn nên là 460x817px.</p>
+            <div>
+            <img src="" id="preview-blog-thumbnail">
+            </div>
+        </div>
+        <div class="container-editor">
+            <h3>Mô tả</h3>
+            
+                <textarea name="content" id="content"></textarea>
+                <script>CKEDITOR.replace('content');</script>
+        
+        </div>
+       
+   </form>
+   <button type="submit" class="btn btn-primary" style="margin-top: 80px">Lưu</button> 
+</div>
+</div>
+<script>
+    var t = document.getElementById('blog-thumbnail')
+    t.onchange = () => {
+        var fileSelected = t.files
+        var fileToLoad = fileSelected[0]
+        console.log(fileToLoad)
+        var fileReader = new FileReader()
+        fileReader.onload = (fileLoad) => {
+            var srcData = fileLoad.target.result
+           
+            document.getElementById('preview-blog-thumbnail').src = srcData
+      
+        }
+        fileReader.readAsDataURL(fileToLoad)
+    }
+    var form = document.forms['container-form']
+    document.querySelector('.btn').onclick = () => {
+        let slug = document.querySelector('input[name="slug"]').value
+        $.ajax({
+            type: 'POST',
+            url: '/sharing/checkslug',
+            data: ({slug: slug}), 
+            success: function(data){
+                if(data.mess == 'Success') {
+                    document.querySelector('.mess-err').innerHTML = 'Đã tồn tại đường dẫn'
+                }
+                else {
+                    form.submit();
+                }
+            },
+            error: function(err) {
+                console.log(err)
+            }
+        })  
+    }
+    
+</script>

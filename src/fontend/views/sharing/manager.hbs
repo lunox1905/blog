@@ -1,0 +1,146 @@
+<link rel="stylesheet" href="/css/manager.css">
+<div class="container">
+  {{>menu}}
+  <div class="container-manager container-post">
+  <form name="container-form" method="GET" action="/sharing/deleteall/{{author}}" class="mt-4">
+    <div class="manager-option">
+      <div class="d-flex align-items-center">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="check-all">
+          <lable class="form-check-lable" for="check-all">Chọn tất cả</lable>
+        </div>
+        <select class="form-control-sm select-option-manager" name="action">
+          <option value="null">Hành động</option>
+          <option value="delete">Xóa</option>
+        </select>
+        <button class="btn btn-primary btn-action btn-sm disabled">Thực hiện</button>
+      </div>
+      <a href="/sharing/create" class="btn-primary btn-sm">
+        + Tạo mới
+      </a>
+    </div> 
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">STT</th>
+          <th scope="col">Tên bài</th>
+          <th scope="col">Trạng thái</th>
+          <th scope="col">Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each posts}}
+        <tr class="row-auth">
+          <th>
+            <div class="form-check">
+              <input style="margin-top: 14px;" type="checkbox" name="flimIds[]" value="{{this._id}}" class="form-check-input">
+            </div>
+          </th>
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.title}}</td>
+          {{#if this.isBrowse}}
+          <td>
+            Đã xuất bản
+          </td>
+          {{else}}
+          
+          <td>
+            Chưa xuất bản
+          </td>
+          {{/if}}
+          <td>
+            <a href="/sharing/editpost/{{this._id}}" class="btn btn-link">Sửa</a>
+            <a href="" data-id="{{this._id}}" data-name="{{this.slug}}"
+             class="btn btn-link" data-toggle="modal" data-target="#delete-modal">Xóa</a>
+ 
+          </td>
+        </tr>
+        {{/each}}
+
+
+      </tbody>
+    </table>
+  </form>
+  
+  <!-- Modal -->
+
+
+  <form name="delete-form" method="POST"></form>
+  </div>
+</div>
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xóa phim</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Xóa bộ phim này?
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-delete" class="btn btn-danger">Xóa</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var id;
+    var name;
+    var deleteForm = document.forms['delete-form']
+    var checkAll = $('#check-all')
+    var flimItemCheck = $('input[name="flimIds[]"]')
+    var btnAction = $('.btn-action')
+    var containerForm = document.forms['container-form']
+
+    $('#delete-modal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      id = button.data('id') // Extract info from data-* attributes
+      name = button.data('name')
+    })
+
+    var btnDelete = document.getElementById('btn-delete')
+    btnDelete.onclick = function () {
+      deleteForm.action = '/sharing/deletepost/'  + id + '?_method=DELETE'
+      deleteForm.submit()
+    }
+
+
+    checkAll.change(function () {
+      var isCheckAll = $(this).prop('checked')
+      flimItemCheck.prop('checked', isCheckAll)
+      renderBtnCheck()
+    })
+
+    flimItemCheck.change(function () {
+      var isCheck = flimItemCheck.length === $('input[name="flimIds[]"]:checked').length
+      checkAll.prop('checked', isCheck)
+      renderBtnCheck()
+    })
+
+    btnAction.click(function (e) {
+      e.preventDefault()
+      var isSubmitAble = !$(this).hasClass('disabled')
+      if (isSubmitAble) {
+        containerForm.submit()
+      }
+    })
+
+    function renderBtnCheck() {
+      var countCheck = $('input[name="flimIds[]"]:checked').length
+      if (countCheck > 0) {
+        btnAction.removeClass('disabled')
+      } else {
+        btnAction.addClass('disabled')
+      }
+    }
+  })
+
+</script>

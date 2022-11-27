@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="/css/manager.css">
+<div class="container">
+  {{>menu}}
+  <div class="container-manager container-post">
+  <div class="profile-content">
+    <div class="profile-group">
+        <div class="profile-avatar">
+            <img src="{{user.avatar}}" alt="">
+        </div>
+      
+        <h3 class="profile-name" style="text-align:center; margin: 10px 0">{{user.name}}</h3>
+    </div>
+    <div class="profile-group">
+        <h3 class="cv-title">Thông tin</h3>
+		<ul class="profile-list">
+			<li class="profile-item">
+				<i class="far fa-calendar profile-icon"></i>
+				<span class="profile-contact">{{user.brithday}}</span>
+			</li>
+			<li class="profile-item">
+				
+				<i class="profile-icon fas fa-phone"></i>
+				<span class="profile-contact">{{user.facebook}}</span>
+			</li>
+			<li class="profile-item">
+				<i class="far fa-envelope profile-icon"></i>
+				<span class="profile-contact">{{user.gmail}}</span>
+			</li>
+			<li class="profile-item">
+				<i class="fas fa-home profile-icon"></i>
+			
+				<span class="profile-contact">{{user.address}}</span>
+			</li>
+		</ul>
+    </div>
+  </div>
+  </div>
+</div>
+<script>
+  
+
+</script>

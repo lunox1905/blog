@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="/css/manager.css">
+<link rel="stylesheet" href="/css/auth.css">
+<div class="container">
+    {{>menu}}
+    <div class="container-manager container-post">
+        <form id="loginform" method="POST" action="/login" accept-charset="utf-8">
+            
+            <div class="form-group">
+                <label for='email' class="form-label">Mật khẩu hiện tại</label>
+
+                <input class="btn-input" name='password' id='username' type="text" placeholder="">
+
+                <span class="form-message"></span>
+
+            </div>
+
+
+            <div class="form-group">
+                <label for='password' class="form-label">Mật khẩu mới</label>
+
+                <input class="btn-input" name='newpassword' id='password' type="password">
+
+                <span class="form-message"></span>
+            </div>
+            <div class="form-group">
+                <label for='password' class="form-label">Nhập lại mật khẩu mới</label>
+
+                <input class="btn-input" name='renewpassword' id='repassword' type="password">
+
+                <span class="form-message"></span>
+            </div>
+
+            <button type="submit" id="btn">Lưu thay đổi</button>
+            <div class="err-server">
+                <span class="err-mess"></span>
+            </div>
+        </form>      
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    Validator({
+        form: '#loginform',
+        formGroup: '.form-group',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired("#username", 'Vui lòng nhập email'),
+            Validator.minLength("#password", 6, 'Password phải lớn hơn 5 ký tự'),
+            Validator.isConfirmed('#repassword', function(){
+                    return document.querySelector('#loginform #password').value;
+                }, 'Mật khẩu nhập lại không chính xác'),
+            Validator.isRequired('#repassword', 'Không được để trống phần này')
+        ],
+        onSubmit: function (data) {
+            
+                    $.ajax({
+                        type: 'POST',
+                        url: '/changePass',
+                        data: ({password: data.password, 
+                        newpassword: data.newpassword}), 
+                        success: function(data){
+                            if(data.mess == 'success'){
+                                document.querySelector('.err-mess').innerHTML = "Đã thay đổi mật khẩu"
+                            } else {
+                                
+                            }
+                        },
+                        error: function(err) {
+                            console.log(err)
+                        }
+                    
+                })
+             
+        }
+    })
+    })
+</script>
