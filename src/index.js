@@ -28,4 +28,4 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'fontend', 'views'))
 
 route(app);
-app.listen(process.env.PORT, () => console.log(`localhost:${port}`))
+app.listen(process.env.PORT)
